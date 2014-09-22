@@ -10,8 +10,10 @@ matches = vl_ubcmatch(d1, d2);
 visualizeMatching(I, J, f1, f2, matches, 'save', 'raw_matches.jpg');
 matchedPoints1 = f1(1 : 2, matches(1, :))';
 matchedPoints2 = f2(1 : 2, matches(2, :))';
-[~, inliersIndex] = estimateFundamentalMatrix(matchedPoints1, ...
-        matchedPoints2, 'Method', 'RANSAC');
+[F, inliersIndex, status] = estimateFundamentalMatrix(matchedPoints1, ...
+        matchedPoints2, 'Method', 'RANSAC', 'InlierPercentage', 0.1, ...
+        'NumTrials', 2000, 'DistanceThreshold', 0.001, 'Confidence', 99.99);
+fprintf('Rank of computed F = %d, status = %d\n', rank(F), status);
 matches = matches(:, inliersIndex == 1);
 visualizeMatching(I, J, f1, f2, matches, 'save', 'final_matches.jpg');
 

@@ -6,3 +6,9 @@ To run
 ```matlab
 >> match
 ```
+
+Results
+-------
+Are stored in the directory itself. `raw_matches.jpg` shows the initial 
+matches, and `final_matches.jpg` is the filtered matches.
+
